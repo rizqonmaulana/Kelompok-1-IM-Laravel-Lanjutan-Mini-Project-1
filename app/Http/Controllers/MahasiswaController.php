@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Auth;
+use DB;
 
 class MahasiswaController extends Controller
 {
@@ -83,4 +85,13 @@ class MahasiswaController extends Controller
 
         return response()->json(compact('user'));
     }
+
+    public function detail($id){
+         $mahasiswa = DB::table('mahasiswa')->where('id',$id)->get();
+           return response($mahasiswa);
+    }
+    public function logout(){
+        auth()->logout();
+    }
 }
+
