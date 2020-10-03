@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class UserController extends Controller
+class MahasiswaController extends Controller
 {
     public function login(Request $request)
     {
@@ -32,7 +32,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
-            'telepon' => 'required|unique:users',
+            'telepon' => 'required|unique:mahasiswa',
             'role' => 'required',
             'nim' => 'required',
             'jurusan' => 'required',
@@ -43,7 +43,7 @@ class UserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $user = User::create([
+        $user = Mahasiswa::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),

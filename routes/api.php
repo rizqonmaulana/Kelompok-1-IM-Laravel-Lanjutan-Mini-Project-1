@@ -13,13 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('register', 'UserController@register');
-Route::post('login', 'UserController@login');
+Route::post('register', 'MahasiswaController@register');
+Route::post('login', 'MahasiswaController@login');
 Route::get('book', 'BookController@book');
 
-Route::get('bookall', 'BookController@bookAuth')->middleware('jwt.verify');
-Route::get('user', 'UserController@getAuthenticatedUser')->middleware('jwt.verify');
+Route::get('status', 'BookController@bookAuth')->middleware('jwt.verify');
+Route::get('user', 'MahasiswaController@getAuthenticatedUser')->middleware('jwt.verify');

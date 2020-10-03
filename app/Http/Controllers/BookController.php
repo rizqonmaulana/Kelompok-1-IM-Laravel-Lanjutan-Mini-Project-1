@@ -8,7 +8,7 @@ use Auth;
 class BookController extends Controller
 {
     public function book() {
-        $data = "Data All Book";
+        $data = "Bisa";
         return response()->json($data, 200);
     }
 
