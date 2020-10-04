@@ -37,8 +37,7 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 		Route::get('book', 'BookController@book');
 		Route::get('status', 'BookController@bookAuth');
         Route::post('krs','KrsController@store');
-        Route::post('matakuliah', 'matakuliahController@store');
-        Route::put('dosen', 'matakuliahController@update');
+
 	});
 
 	// Role Id 2 Untuk Mahasiswa
@@ -50,4 +49,9 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 
 
 });
+
+        Route::post('matakuliah', 'matakuliahController@store');
+        Route::put('matakuliah', 'matakuliahController@update');
+        Route::post('dosen', 'dosenController@store');
+        Route::put('dosen', 'dosenController@update');
 
