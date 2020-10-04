@@ -19,6 +19,30 @@ class KrsController extends Controller
  	}
 
  	public function get(){
- 		return 'coba gan';
+ 		return 'coba test';
+ 	}
+
+ 	public function all(){
+ 		$allKrs = DB::table('krs')
+            ->join('mahasiswa', 'mahasiswa.nim', '=', 'krs.nim')
+            ->join('mata_kuliah', 'krs.kode_mata_kuliah', '=', 'mata_kuliah.kode_mata_kuliah')
+            ->join('dosen','mata_kuliah.nip_dosen','=','dosen.nip')
+            ->select('mahasiswa.nim AS Nim','mahasiswa.name AS Nama Mahasiswa','mata_kuliah.kode_mata_kuliah AS Kode Mata Kuliah','mata_kuliah.nama_mata_kuliah AS Nama Mata Kuliah','dosen.nip AS Kode Dosen Pengajar','dosen.nama AS Nama Dosen Pengajar')
+            ->get();
+
+        return response($allKrs);
+ 	}
+
+ 	public function detail($nim){
+
+ 		$detailKrs = DB::table('krs')
+            ->join('mahasiswa', 'mahasiswa.nim', '=', 'krs.nim')
+            ->join('mata_kuliah', 'krs.kode_mata_kuliah', '=', 'mata_kuliah.kode_mata_kuliah')
+            ->join('dosen','mata_kuliah.nip_dosen','=','dosen.nip')
+            ->select('mahasiswa.nim AS Nim','mahasiswa.name AS Nama Mahasiswa','mata_kuliah.kode_mata_kuliah AS Kode Mata Kuliah','mata_kuliah.nama_mata_kuliah AS Nama Mata Kuliah','dosen.nip AS Kode Dosen Pengajar','dosen.nama AS Nama Dosen Pengajar')
+            ->where('krs.nim',$nim)
+            ->get();
+
+        return response($detailKrs);
  	}
 }

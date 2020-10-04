@@ -36,6 +36,7 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 		Route::get('user', 'MahasiswaController@getAuthenticatedUser');
 		Route::get('book', 'BookController@book');
 		Route::get('status', 'BookController@bookAuth');
+        Route::get('krs','KrsController@all');
         Route::post('krs','KrsController@store');
 
 	});
@@ -45,6 +46,9 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 
 			// Route::get('/krs','KrsController@get');
 			Route::get('/profile/{id}','MahasiswaController@detail');
+
+			// Yang Dikirim adalah nim mahasiswa
+			Route::get('/detail-krs/{nim}','KrsController@detail');
 	});
 
 
