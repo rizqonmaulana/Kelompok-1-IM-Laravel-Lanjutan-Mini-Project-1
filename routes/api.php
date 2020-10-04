@@ -19,7 +19,33 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'MahasiswaController@register');
 Route::post('login', 'MahasiswaController@login');
+Route::post('logout','MahasiswaController@logout');
+
+/* Route Sebelum Di Prefix dan Group
 Route::get('book', 'BookController@book');
 
 Route::get('status', 'BookController@bookAuth')->middleware('jwt.verify');
 Route::get('user', 'MahasiswaController@getAuthenticatedUser')->middleware('jwt.verify');
+
+Route::post('krs','KrsController@store'); 	
+*/
+Route::group(['middleware' => 'jwt.verify'], function(){
+
+	//Role Id 1 untuk admin
+	Route::group(['prefix'=>'admin','middleware'=> 'role-admin'] ,function(){
+		Route::get('user', 'MahasiswaController@getAuthenticatedUser');
+		Route::get('book', 'BookController@book');
+		Route::get('status', 'BookController@bookAuth');
+		Route::post('krs','KrsController@store'); 	
+	});
+
+	// Role Id 2 Untuk Mahasiswa
+	Route::group(['prefix'=>'mahasiswa','middleware'=> 'role-user'] ,function(){
+
+			// Route::get('/krs','KrsController@get');
+			Route::get('/profile/{id}','MahasiswaController@detail');
+	});
+
+
+});
+

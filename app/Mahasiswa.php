@@ -39,4 +39,22 @@ class Mahasiswa extends Authenticatable implements JWTSubject
     }
 
     protected $table = 'mahasiswa';
+
+    public function isAdmin(){
+        // Role Id Admin
+        if($this->role == 1){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isUser(){
+        // Role Id Mahasiswa
+        if($this->role == 2){
+            return true;
+        }
+
+        return false;
+    }
 }
