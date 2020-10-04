@@ -27,7 +27,7 @@ Route::get('book', 'BookController@book');
 Route::get('status', 'BookController@bookAuth')->middleware('jwt.verify');
 Route::get('user', 'MahasiswaController@getAuthenticatedUser')->middleware('jwt.verify');
 
-Route::post('krs','KrsController@store'); 	
+Route::post('krs','KrsController@store');
 */
 Route::group(['middleware' => 'jwt.verify'], function(){
 
@@ -36,7 +36,9 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 		Route::get('user', 'MahasiswaController@getAuthenticatedUser');
 		Route::get('book', 'BookController@book');
 		Route::get('status', 'BookController@bookAuth');
-		Route::post('krs','KrsController@store'); 	
+        Route::post('krs','KrsController@store');
+        Route::post('matakuliah', 'matakuliahController@store');
+        Route::put('dosen', 'matakuliahController@update');
 	});
 
 	// Role Id 2 Untuk Mahasiswa
