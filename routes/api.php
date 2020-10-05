@@ -37,8 +37,8 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 		Route::get('book', 'BookController@book');
 		Route::get('status', 'BookController@bookAuth');
         Route::get('krs','KrsController@all');
-        Route::post('krs','KrsController@store');
-
+        Route::post('dosen', 'dosenController@store');
+        Route::post('matakuliah', 'matakuliahController@store');
 	});
 
 	// Role Id 2 Untuk Mahasiswa
@@ -48,14 +48,17 @@ Route::group(['middleware' => 'jwt.verify'], function(){
 			Route::get('/profile/{id}','MahasiswaController@detail');
 
 			// Yang Dikirim adalah nim mahasiswa
-			Route::get('/detail-krs/{nim}','KrsController@detail');
+            Route::get('/detail-krs/{nim}','KrsController@detail');
+
+            // mahasiswa membuat krs
+            Route::post('krs','KrsController@store');
 	});
 
 
 });
 
-        Route::post('matakuliah', 'matakuliahController@store');
-        Route::put('matakuliah', 'matakuliahController@update');
-        Route::post('dosen', 'dosenController@store');
-        Route::put('dosen', 'dosenController@update');
+        Route::get('matakuliah', 'matakuliahController@all');
+        Route::get('dosen', 'dosenController@all');
+        // Route::put('matakuliah', 'matakuliahController@update');
+        // Route::put('dosen', 'dosenController@update');
 

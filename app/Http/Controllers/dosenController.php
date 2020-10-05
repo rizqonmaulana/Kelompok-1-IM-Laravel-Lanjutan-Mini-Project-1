@@ -32,4 +32,10 @@ class dosenController extends Controller
 
         return response('Data berhasil di update');
     }
+
+    public function all(){
+        $allDosen = DB::table('dosen')->get();
+
+       return response($allDosen);
+    }
 }

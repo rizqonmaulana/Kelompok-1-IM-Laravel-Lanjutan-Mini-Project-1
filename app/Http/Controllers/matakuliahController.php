@@ -14,7 +14,9 @@ class matakuliahController extends Controller
                     [
                        'id' => request('id'),
                        'kode_mata_kuliah' => request('kode_mata_kuliah'),
+                       'nama_mata_kuliah' => request('nama_mata_kuliah'),
                        'sks' => request('sks'),
+                       'nip_dosen' => request('nip_dosen'),
                    ],
             ]);
 
@@ -37,5 +39,11 @@ class matakuliahController extends Controller
         ]);
 
         return response('Data Berhasil Di update');
+    }
+
+    public function all(){
+        $allMk = DB::table('mata_kuliah')->get();
+
+       return response($allMk);
     }
 }
